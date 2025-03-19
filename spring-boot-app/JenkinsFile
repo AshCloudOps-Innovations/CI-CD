@@ -38,15 +38,16 @@ pipeline {
       steps {
           script {
               sh '''
+                  export PATH=$PATH:/usr/bin:/usr/local/bin
+                  echo "Docker path: $(which docker)"
                   cd spring-boot-app
-                  which docker
-                  /usr/bin/docker build -t ${DOCKER_IMAGE} .
+                  docker build -t ${DOCKER_IMAGE} .
               '''
-        def dockerImage = docker.image("${DOCKER_IMAGE}")
-        docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
-            dockerImage.push()
-           }
-        }
+              def dockerImage = docker.image("${DOCKER_IMAGE}")
+              docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+                  dockerImage.push()
+              }
+          }
       }
     }
     stage('Update Deployment File') {

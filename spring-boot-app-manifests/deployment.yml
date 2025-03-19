@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: ubuntu-maven-java-ashwin:replaceImageTag
+        image: ashconreg/ubuntu-maven-java-ashwin:replaceImageTag
         ports:
         - containerPort: 8080

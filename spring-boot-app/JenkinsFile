@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'ubuntu-maven-java-ashwin:latest'
+      image 'ashconreg/ubuntu-maven-java-ashwin:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -31,7 +31,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "ubuntu-maven-java-ashwin:latest:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "ashconreg/ubuntu-maven-java-ashwin:v1:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
